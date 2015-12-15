@@ -1,0 +1,425 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>SSP Homework</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-12-15"><meta name="DC.source" content="SSP_HW_matlab.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>SSP Homework</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">iii)</a></li><li><a href="#2">iv)</a></li><li><a href="#3">v)</a></li></ul></div><h2>iii)<a name="1"></a></h2><pre class="codeinput"><span class="comment">%out=pingstats_linux('www.google.com',1000,'v');</span>
+<span class="comment">%save out</span>
+load(<span class="string">'out.mat'</span>)
+close <span class="string">all</span>
+
+<span class="comment">% Gaussian</span>
+mu_g = sum(out)/length(out)
+
+var_g = sum((out-mu_g).^2)/length(out)
+
+<span class="comment">% Rayleigh</span>
+
+var_ray = (1/(2*length(out))) * sum((out).^2)
+
+<span class="comment">% Erlang</span>
+
+lamda_0 = length(out)/sum(out)
+
+lamda_1 = (2*length(out))/sum(out)
+
+lamda_2 = (3*length(out))/sum(out)
+
+<span class="comment">% Exponential</span>
+
+alpha_exp = min(out)
+
+Y = (out-alpha_exp);
+lambda_exp = length(out)/sum(Y)
+
+<span class="comment">% SR (shifted Rayleigh)</span>
+
+alpha_SR = min(out)
+
+lambda_SR = (sum(((out-alpha_SR).^2)/(2*length(out))))
+</pre><pre class="codeoutput">
+mu_g =
+
+    8.6374
+
+
+var_g =
+
+  142.1568
+
+
+var_ray =
+
+  108.3811
+
+
+lamda_0 =
+
+    0.1158
+
+
+lamda_1 =
+
+    0.2316
+
+
+lamda_2 =
+
+    0.3473
+
+
+alpha_exp =
+
+    3.4600
+
+
+lambda_exp =
+
+    0.1931
+
+
+alpha_SR =
+
+    3.4600
+
+
+lambda_SR =
+
+   84.4814
+
+</pre><h2>iv)<a name="2"></a></h2><pre class="codeinput">figure(<span class="string">'Name'</span>,<span class="string">'Histogram'</span>,<span class="string">'NumberTitle'</span>,<span class="string">'off'</span>)
+
+y_min = min(out);
+y_max = max(out);
+out_n = out;
+g_out = sort(out_n);
+subplot(3,2,1)
+hist(out,200)
+[f,x]=hist(out,200);
+title(<span class="string">'Histogram for www.google.com'</span>)
+
+gaus     = (1/(sqrt(2*pi*var_g)))*exp(-(((g_out)-mu_g).^2/(2*var_g)));
+gaus_sec = (1/(sqrt(2*pi*var_g)))*exp(-(((.1:70)-mu_g).^2/(2*var_g)));
+
+rayleigh     = ((out/var_ray).*exp(-((out.^2)/(2*var_ray))));
+rayleigh_sec = (((.1:70)/var_ray).*exp(-(((.1:70).^2)/(2*var_ray))));
+
+erlang_0   = (lamda_0 * exp(-lamda_0*out_n));
+erlang_0_2 = (lamda_0 * exp(-lamda_0*(.1:70)));
+
+erlang_1   = ((lamda_1^2) .* out_n .* exp(-lamda_1*out_n));
+erlang_1_2 = ((lamda_1^2) .* (.1:70) .* exp(-lamda_1*(.1:70)));
+
+erlang_2   = (((lamda_2^3)/2) .* (out_n.^2) .* exp(-lamda_2*out_n));
+erlang_2_2 = (((lamda_2^3)/2) .* ((.1:70).^2) .* exp(-lamda_2*(.1:70)));
+
+exponent     = (lambda_exp)*exp(-lambda_exp*(out-alpha_exp));
+exponent_sec = (lambda_exp)*exp(-lambda_exp*((.1:70)-alpha_exp));
+
+SR   = ((out_n-alpha_SR)/lambda_SR).*exp(-1*(((out_n-alpha_SR).^2)/(2*lambda_SR)));
+
+
+subplot(3,2,2)
+hold <span class="string">on</span>
+bar(x,f/sum(f))
+plot(g_out,gaus,<span class="string">'*'</span>)
+plot(.1:70,gaus_sec,<span class="string">'r'</span>)
+hold <span class="string">off</span>
+title(<span class="string">'Gaussian'</span>)
+
+
+subplot(3,2,3)
+hold <span class="string">on</span>
+bar(x,f/sum(f))
+plot(out_n,rayleigh,<span class="string">'*'</span>)
+plot(.1:70,rayleigh_sec,<span class="string">'r'</span>)
+hold <span class="string">off</span>
+title(<span class="string">'Rayleigh Distribution'</span>)
+
+
+subplot(3,2,4)
+hold <span class="string">on</span>
+bar(x,f/sum(f))
+plot(out_n,erlang_0,<span class="string">'*'</span>)
+plot(out_n,erlang_1,<span class="string">'g*'</span>)
+plot(out_n,erlang_2,<span class="string">'c*'</span>)
+plot(.1:70,erlang_0_2,<span class="string">'r'</span>)
+plot(.1:70,erlang_1_2,<span class="string">'r'</span>)
+plot(.1:70,erlang_2_2,<span class="string">'r'</span>)
+hold <span class="string">off</span>
+title(<span class="string">'Erlang Distribution'</span>)
+legend(<span class="string">'m = 0'</span>,<span class="string">'m = 1'</span>,<span class="string">'m = 2'</span>)
+
+subplot(3,2,5)
+hold <span class="string">on</span>
+bar(x,f/sum(f))
+plot(out_n,exponent,<span class="string">'*'</span>)
+plot(.1:70,exponent_sec,<span class="string">'r'</span>)
+hold <span class="string">off</span>
+title(<span class="string">'Exponential Distribution'</span>)
+
+subplot(3,2,6)
+hold <span class="string">on</span>
+bar(x,f/sum(f))
+plot(out_n,SR,<span class="string">'*'</span>)
+<span class="comment">%plot(.1:70,SR,'r')</span>
+hold <span class="string">off</span>
+title(<span class="string">'Shifted Rayleigh Distribution'</span>)
+
+figure(<span class="string">'Name'</span>,<span class="string">'Final Plot'</span>,<span class="string">'NumberTitle'</span>,<span class="string">'off'</span>)
+hold <span class="string">on</span>
+hist(out,200)
+plot(g_out,(1/max(gaus))*278*gaus,<span class="string">'*'</span>)
+plot(out_n,(1/max(rayleigh))*rayleigh*278,<span class="string">'r*'</span>)
+<span class="comment">%erlang</span>
+plot(out_n,(1/max(erlang_2))*erlang_2*278,<span class="string">'c*'</span>)
+plot(out_n,(1/max(exponent))*exponent*278,<span class="string">'*'</span>)
+plot(out_n,(1/max(SR))*SR*278,<span class="string">'g*'</span>)
+
+
+legend(<span class="string">'Hist'</span>,<span class="string">'Gaus'</span>,<span class="string">'Rayleigh'</span>,<span class="string">'Erlang0'</span>,<span class="string">'Exponent'</span>,<span class="string">'Shifted Rayleigh'</span>)
+<span class="comment">%legend('Hist','Gaus','Rayleigh','Erlang0','Erlang1','Erlang2','Exponent')</span>
+</pre><img vspace="5" hspace="5" src="SSP_HW_matlab_01.png" alt=""> <img vspace="5" hspace="5" src="SSP_HW_matlab_02.png" alt=""> <h2>v)<a name="3"></a></h2><pre class="codeinput">Name = {<span class="string">'Gaus'</span>,<span class="string">'Rayleigh'</span>,<span class="string">'Erlang 0'</span>,<span class="string">'Erlang 1'</span>,<span class="string">'Erlang 2'</span>,<span class="string">'Exponential'</span>,<span class="string">'SR'</span>};
+
+maxlikelihood(1) = max(sum(log(gaus)));
+maxlikelihood(2) = max(sum(log(rayleigh)));
+maxlikelihood(3) = max(sum(log(erlang_0)));
+maxlikelihood(4) = max(sum(log(erlang_1)));
+maxlikelihood(5) = max(sum(log(erlang_2)));
+maxlikelihood(6) = max(sum(log(exponent)));
+maxlikelihood(7)   = max(sum(log(SR)));
+
+[val ind] = max((maxlikelihood))
+Name(ind)
+<span class="comment">%phat = mle(out,'distribution','exponential')</span>
+</pre><pre class="codeoutput">
+val =
+
+  -2.6443e+03
+
+
+ind =
+
+     6
+
+
+ans = 
+
+    'Exponential'
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% SSP Homework
+
+%% iii)
+%out=pingstats_linux('www.google.com',1000,'v');
+%save out
+load('out.mat')
+close all
+
+% Gaussian
+mu_g = sum(out)/length(out)
+
+var_g = sum((out-mu_g).^2)/length(out)
+
+% Rayleigh
+
+var_ray = (1/(2*length(out))) * sum((out).^2)
+
+% Erlang
+
+lamda_0 = length(out)/sum(out)
+
+lamda_1 = (2*length(out))/sum(out)
+
+lamda_2 = (3*length(out))/sum(out)
+
+% Exponential
+
+alpha_exp = min(out)
+
+Y = (out-alpha_exp);
+lambda_exp = length(out)/sum(Y)
+
+% SR (shifted Rayleigh)
+
+alpha_SR = min(out)
+
+lambda_SR = (sum(((out-alpha_SR).^2)/(2*length(out))))
+
+%% iv)
+figure('Name','Histogram','NumberTitle','off')
+
+y_min = min(out);
+y_max = max(out);
+out_n = out;
+g_out = sort(out_n);
+subplot(3,2,1)
+hist(out,200)
+[f,x]=hist(out,200);
+title('Histogram for www.google.com')
+
+gaus     = (1/(sqrt(2*pi*var_g)))*exp(-(((g_out)-mu_g).^2/(2*var_g)));
+gaus_sec = (1/(sqrt(2*pi*var_g)))*exp(-(((.1:70)-mu_g).^2/(2*var_g)));
+
+rayleigh     = ((out/var_ray).*exp(-((out.^2)/(2*var_ray))));
+rayleigh_sec = (((.1:70)/var_ray).*exp(-(((.1:70).^2)/(2*var_ray))));
+
+erlang_0   = (lamda_0 * exp(-lamda_0*out_n));
+erlang_0_2 = (lamda_0 * exp(-lamda_0*(.1:70)));
+
+erlang_1   = ((lamda_1^2) .* out_n .* exp(-lamda_1*out_n));
+erlang_1_2 = ((lamda_1^2) .* (.1:70) .* exp(-lamda_1*(.1:70)));
+
+erlang_2   = (((lamda_2^3)/2) .* (out_n.^2) .* exp(-lamda_2*out_n));
+erlang_2_2 = (((lamda_2^3)/2) .* ((.1:70).^2) .* exp(-lamda_2*(.1:70)));
+
+exponent     = (lambda_exp)*exp(-lambda_exp*(out-alpha_exp));
+exponent_sec = (lambda_exp)*exp(-lambda_exp*((.1:70)-alpha_exp));
+
+SR   = ((out_n-alpha_SR)/lambda_SR).*exp(-1*(((out_n-alpha_SR).^2)/(2*lambda_SR)));
+
+
+subplot(3,2,2)
+hold on
+bar(x,f/sum(f))
+plot(g_out,gaus,'*')
+plot(.1:70,gaus_sec,'r')
+hold off
+title('Gaussian')
+
+
+subplot(3,2,3)
+hold on
+bar(x,f/sum(f))
+plot(out_n,rayleigh,'*')
+plot(.1:70,rayleigh_sec,'r')
+hold off
+title('Rayleigh Distribution')
+
+
+subplot(3,2,4)
+hold on
+bar(x,f/sum(f))
+plot(out_n,erlang_0,'*')
+plot(out_n,erlang_1,'g*')
+plot(out_n,erlang_2,'c*')
+plot(.1:70,erlang_0_2,'r')
+plot(.1:70,erlang_1_2,'r')
+plot(.1:70,erlang_2_2,'r')
+hold off
+title('Erlang Distribution')
+legend('m = 0','m = 1','m = 2')
+
+subplot(3,2,5)
+hold on
+bar(x,f/sum(f))
+plot(out_n,exponent,'*')
+plot(.1:70,exponent_sec,'r')
+hold off
+title('Exponential Distribution')
+
+subplot(3,2,6)
+hold on
+bar(x,f/sum(f))
+plot(out_n,SR,'*')
+%plot(.1:70,SR,'r')
+hold off
+title('Shifted Rayleigh Distribution')
+
+figure('Name','Final Plot','NumberTitle','off')
+hold on
+hist(out,200)
+plot(g_out,(1/max(gaus))*278*gaus,'*')
+plot(out_n,(1/max(rayleigh))*rayleigh*278,'r*')
+%erlang
+plot(out_n,(1/max(erlang_2))*erlang_2*278,'c*')
+plot(out_n,(1/max(exponent))*exponent*278,'*')
+plot(out_n,(1/max(SR))*SR*278,'g*')
+
+
+legend('Hist','Gaus','Rayleigh','Erlang0','Exponent','Shifted Rayleigh')
+%legend('Hist','Gaus','Rayleigh','Erlang0','Erlang1','Erlang2','Exponent')
+
+
+%% v)
+
+Name = {'Gaus','Rayleigh','Erlang 0','Erlang 1','Erlang 2','Exponential','SR'};
+
+maxlikelihood(1) = max(sum(log(gaus)));
+maxlikelihood(2) = max(sum(log(rayleigh)));
+maxlikelihood(3) = max(sum(log(erlang_0)));
+maxlikelihood(4) = max(sum(log(erlang_1)));
+maxlikelihood(5) = max(sum(log(erlang_2)));
+maxlikelihood(6) = max(sum(log(exponent)));
+maxlikelihood(7)   = max(sum(log(SR)));
+
+[val ind] = max((maxlikelihood))
+Name(ind)
+%phat = mle(out,'distribution','exponential')
+
+##### SOURCE END #####
+--></body></html>
